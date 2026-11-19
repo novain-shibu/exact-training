@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Same bits on every chip we tested: exact integer training, unlearning and RL"
+authors:
+  - family-names: Shibu
+    given-names: Novain
+    orcid: "https://orcid.org/0009-0001-5143-6088"
+license: Apache-2.0
+repository-code: "https://github.com/novain-shibu/exact-training"
+date-released: "2026-11-19"
+version: "0.1.0"

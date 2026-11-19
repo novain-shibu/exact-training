@@ -1,5 +1,7 @@
 # Exact training: same model, same bits on every machine we tested
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24370497.svg)](https://doi.org/10.5281/zenodo.24370497)
+
 `python reproduce.py` (Python 3 + numpy, CPU only, about 3 minutes)
 
 It trains one tiny transformer four times on the same deterministic data:
@@ -21,4 +23,5 @@ Results and limits: see [NOTE.md](NOTE.md).
 
 Files: `NOTE.md` (results, limits, related work), `reproduce.py` (the test), `xtrain.py` (the exact integer trainer: forward, backward, SGD-momentum, Lion, block-float Adam).
 License: Apache-2.0, same as exact-llm. The author is a student; replies to issues may take about a week.
-Cite: see `CITATION.cff`. Related exact-inference work by the same author: exact-llm (doi.org/10.5281/zenodo.24137507).
+Cite: Shibu, N. (2026). *Same bits on every chip we tested: exact integer training, unlearning and RL* (v0.1.0). Zenodo.
+https://doi.org/10.5281/zenodo.24370497 (all versions: https://doi.org/10.5281/zenodo.24370496). See also `CITATION.cff`. Related exact-inference work by the same author: exact-llm (doi.org/10.5281/zenodo.24137507).

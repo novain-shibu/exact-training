@@ -1,0 +1,31 @@
+# Exact training with every matmul on the Apple GPU (Metal / MPS), float32 only. Must print the same hash as reproduce.py.
+# If the runner exposes no GPU, the job says so and is not counted as a result.
+name: apple-gpu
+on:
+  workflow_dispatch:
+  push:
+    paths: ["reproduce_fp32.py", "xtrain.py", ".github/workflows/apple-gpu.yml"]
+permissions:
+  contents: read
+jobs:
+  mps:
+    runs-on: macos-15
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --quiet numpy torch
+      - name: Device
+        run: |
+          sysctl -n machdep.cpu.brand_string
+          python -c "import torch, platform; print('torch', torch.__version__, '| MPS available:', torch.backends.mps.is_available(), '| built:', torch.backends.mps.is_built(), '|', platform.platform())"
+      - name: Exact training, float32 matmuls on the Apple GPU
+        shell: bash
+        run: |
+          if python -c "import torch, sys; sys.exit(0 if torch.backends.mps.is_available() else 1)"; then
+            python reproduce_fp32.py mps | tee out.txt; grep -q "): MATCH" out.txt
+          else
+            echo "NO GPU EXPOSED ON THIS RUNNER - no result"; python reproduce_fp32.py numpy
+          fi
